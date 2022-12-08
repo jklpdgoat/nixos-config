@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  #imports = [
-    #./configs/alacritty.nix
-  #];
-  
+ 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "jklp";
@@ -25,20 +22,5 @@
 
   # User config append section
   home.packages = with pkgs; [ ];
-  
-  programs.git = {
-    enable = true;
-    userName = "jklpdgoat";
-    userEmail = "jarpadul@gmail.com";
-    aliases = {
-      ci = "commit";
-      co = "checkout";
-      s = "status";
-    };
-    extraConfig = {
-      core.editor = "hx";
-      credential.helper = "cache"; 
-    };
-  };
-    
+   
 }
