@@ -80,6 +80,7 @@
     isNormalUser = true;
     description = "Jar Padul";
     extraGroups = [ "journalctl" "networkmanager" "wheel" "audio" "video" "docker" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
     ];
