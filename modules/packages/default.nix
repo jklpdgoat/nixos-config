@@ -9,20 +9,16 @@ in {
   config = mkIf cfg.enable {
   	home.packages = with pkgs; [
       brave
-      alacritty
-      helix vim
-      ripgrep
-      exa htop fzf pass gnupg bat jq
-      #git
-      wget
+      alacritty helix vim
+      ripgrep exa htop fzf pass gnupg bat jq wget
       
-      firefox-wayland
+      #firefox-wayland
       
       #light
       #brillo
-      brightnessctl
-      playerctl
-      pulseaudio
+      #brightnessctl
+      #playerctl
+      #pulseaudio
       
       rnix-lsp
       

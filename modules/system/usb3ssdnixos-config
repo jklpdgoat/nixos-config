@@ -2,15 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+
+  #imports =
+  #  [ # Include the results of the hardware scan.
+  #    ./hardware-configuration.nix
+  #  ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  networking.hostName = "nixhp15s"; # Define your hostname.
+  networking.hostName = "usb3ssdnixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -24,15 +30,28 @@
   time.timeZone = "Asia/Hong_Kong";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_HK.UTF-8";
+  i18n.defaultLocale = "en_US.utf8";
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  #services.xserver.enable = true;
+  # Enable the GNOME Desktop Environment.
+  #services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.displayManager.gdm.wayland= false;
+  #services.xserver.desktopManager.gnome.enable = true;
+  services = {
+    xserver = {
+      enable = true;
+      displayManager = {
+        #gdm.enable = true;
+        #defaultSession = "gnome";
+      };
+      #displayManager.startx.enable = true;
+      displayManager.gdm.wayland = true;
+      #desktopManager.gnome.enable = true;
+      #windowManager.bspwm.enable = true;
+      videoDrivers = [ "amdgpu" ];
+    };
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -40,7 +59,7 @@
     xkbVariant = "dvp";
   };
   
-  # Console config
+  #console.useXkbConfig = true;
   console = {
     font = "ter-powerline-v20b";
     packages = [
@@ -49,9 +68,9 @@
     ];
     keyMap = "dvorak-programmer";
   };
-
+  
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -72,18 +91,18 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  #services.xserver.libinput.touchpad.middleEmulation = true;
-  #services.xserver.libinput.touchpad.tapping = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jklp = {
     isNormalUser = true;
-    description = "Jar Padul";
-    extraGroups = [ "journalctl" "networkmanager" "wheel" "audio" "video" "docker" ];
-    packages = with pkgs; [
-      firefox
-    ];
+    description = "Jar Pads";
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "docker" ];
+    shell = pkgs.zsh;
+    #packages = with pkgs; [
+    #  #firefox brave thunderbird
+    #];
   };
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -110,21 +129,18 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  # networking.firewall.enable = false;
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-  };
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-  };
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "22.05"; # Did you read the comment?
   
+  # basically identical config for enabling experimental features
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix = {
     package = pkgs.nixUnstable;
     settings.auto-optimise-store = true;
@@ -163,24 +179,58 @@
     };
   };
   
-  # XDG Format
-  # xdg = {
-  #   portal = {
-  #     enable = true;
-  #     extraPortals = with pkgs; [
-  #       xdg-desktop-portal-wlr
-  #       xdg-desktop-portal-gtk
-  #     ];
-  #     #gtkUsePortal = true;
-  #   };
-  # };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true; # to make gtk apps happy
+  #  extraPackages = with pkgs; [
+  #    swaylock
+  #    swayidle
+  #    wl-clipboard
+  #    wf-recorder
+  #    mako  # notification daemon
+  #    #wofi
+  #    waybar
+  #  ];
+    extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      export MOZ_ENABLE_WAYLAND=1
+    '';
+  };
+  
+  environment.variables = {
+    NIXOS_CONFIG = "$HOME/.config/nixos-cfg/configuration.nix";
+    NIXOS_CONFIG_DIR = "$HOME/.config/nixos-cfg/";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    EDITOR = "hx";
+    GTK_RC_FILES = "$HOME/.local/share/gtk-1.0/gtkrc";
+    GTK2_RC_FILES = "$HOME/.local/share/gtk-2.0/gtkrc";
+    
+    GTK_USE_PORTAL = "1";
+    
+    MOZ_ENABLE_WAYLAND = "1";
+    XDG_CURRENT_DESKTOP = "sway"; 
+  };
+  
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+      #gtkUsePortal = true;
+    };
+  };
+  
+  # Binary Cache for Haskell.nix
+  #nix.settings.trusted-public-keys = [
+  #  "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+  #];
+  #nix.settings.substituters = [
+  #  "https://cache.iog.io"
+  #];
+  
+  virtualisation.docker.enable = true;
 
 }

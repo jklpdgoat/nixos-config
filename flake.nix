@@ -1,5 +1,5 @@
 {
-    description = "NixOS configuration";
+    description = "Generic NixOS Configuration";
 
     # All inputs for the system
     inputs = {
@@ -52,6 +52,7 @@
 
         in {
             nixosConfigurations = {
+                nixhp15s = mkSystem inputs.nixpkgs "x86_64-linux" "nixhp15s";
                 usb3ssdnixos = mkSystem inputs.nixpkgs "x86_64-linux" "usb3ssdnixos";
             };
     };
