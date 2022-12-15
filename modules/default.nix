@@ -4,15 +4,15 @@
     home.stateVersion = "22.11";
     imports = [
         # gui
-        ./sway
-        ./foot
-        ./wofi
+        #./sway
+        #./foot
+        #./wofi
 
-        # cli
+        ## cli
         ./git
 
-        # system
-        ./xdg
+        ## system
+        #./xdg
         ./packages
     ];
 }

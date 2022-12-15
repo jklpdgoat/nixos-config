@@ -12,7 +12,7 @@
         git.enable = true;
 
         # system
-        xdg.enable = true;
+        #xdg.enable = true;
         packages.enable = true;
     };
 }
