@@ -9,6 +9,8 @@ in {
   config = mkIf cfg.enable {
   	home.packages = with pkgs; [
       brave
+
+      # CLI
       alacritty helix vim
       ripgrep exa htop fzf pass gnupg bat jq wget
       
@@ -20,11 +22,11 @@ in {
       #playerctl
       #pulseaudio
       
-      rnix-lsp
+      # LSP binaries
+      rnix-lsp terraform-ls
       
-      # devops stuff
-      #terraform
-      awscli2 terraform terraform-ls
+      # cloud tools
+      awscli2 terraform
     ];
 
     home.file.".config/alacritty/alacritty.yml".source = ./alacritty;
