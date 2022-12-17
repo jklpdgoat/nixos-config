@@ -12,7 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+  #boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =

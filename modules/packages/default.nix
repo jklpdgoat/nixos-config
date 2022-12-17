@@ -24,6 +24,7 @@ in {
       
       # devops stuff
       #terraform
+      awscli2 terraform terraform-ls
     ];
 
     home.file.".config/alacritty/alacritty.yml".source = ./alacritty;
@@ -57,6 +58,9 @@ in {
       initExtra = ''
         eval "$(starship init zsh)"
         eval "$(direnv hook zsh)"
+
+        export PATH=~/.npm-packages/bin:$PATH
+        export NODE_PATH=~/.npm-packages/lib/node_modules
       '';
     };
   

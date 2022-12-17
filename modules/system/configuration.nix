@@ -42,6 +42,7 @@
   
   # Console config
   console = {
+    earlySetup = true;
     font = "ter-powerline-v20b";
     packages = [
       pkgs.terminus_font
