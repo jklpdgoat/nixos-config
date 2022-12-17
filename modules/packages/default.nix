@@ -13,6 +13,7 @@ in {
       # CLI
       alacritty helix vim
       ripgrep exa htop fzf pass gnupg bat jq wget
+      wl-clipboard
       
       #firefox-wayland
       
