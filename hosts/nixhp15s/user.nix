@@ -5,7 +5,7 @@
     config.modules = {
         # gui
         #sway.enable = true;
-        foot.enable = true;
+        #foot.enable = true;
         #wofi.enable = true;
 
         # cli
