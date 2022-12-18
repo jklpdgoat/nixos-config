@@ -11,7 +11,7 @@ in {
       brave
 
       # CLI
-      alacritty helix vim
+      wezterm alacritty helix vim
       ripgrep exa htop fzf pass gnupg bat jq wget
       wl-clipboard
       
@@ -25,6 +25,8 @@ in {
       
       # LSP binaries
       rnix-lsp terraform-ls
+      nodePackages_latest.yaml-language-server
+      nodePackages_latest.bash-language-server
       
       # cloud tools
       awscli2 terraform
