@@ -12,6 +12,7 @@ in {
         main = {
           #font = "JetBrainsMono Nerdfont:size=7:line-height=16px";
           font = "Hack Nerd Font Mono:size=8.50";
+          dpi-aware = "yes";
           #pad = "12x12";
         };
         
