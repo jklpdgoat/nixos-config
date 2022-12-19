@@ -10,6 +10,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  boot.loader.systemd-boot.consoleMode = "0";
+
   networking.hostName = "nixhp15s"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -72,7 +74,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
   #services.xserver.libinput.touchpad.middleEmulation = true;
   #services.xserver.libinput.touchpad.tapping = true;
 
@@ -164,6 +166,16 @@
       hinting.autohint = true;
     };
   };
+
+  # user systemd services
+  #systemd.user.services.foot-server@wayland-0.service = {
+  #  description = "Execute foot server as a service";
+  #  serviceConfig.PassEnvironment = "DISPLAY";
+  #  script = ''
+  #    echo "Test foot server as a service"
+  #  ''
+  #  wantedBy = [ "multi-user.target" ];
+  #}
   
   # XDG Format
   # xdg = {
