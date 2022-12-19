@@ -6,11 +6,17 @@
 
 {
   # Bootloader.
+  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
+  boot.plymouth.enable = true;
+  boot.kernelParams = [ "quiet" "splash" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail" ];
+  
   boot.loader.systemd-boot.enable = true;
+  #boot.loader.timeout = 0;
+  boot.loader.systemd-boot.consoleMode = "0";
+
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-  boot.loader.systemd-boot.consoleMode = "0";
 
   networking.hostName = "nixhp15s"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -44,13 +50,22 @@
   
   # Console config
   console = {
-    earlySetup = true;
+    #earlySetup = true;
     packages = [
       pkgs.terminus_font
       pkgs.powerline-fonts
     ];
     font = "ter-powerline-v18b";
     keyMap = "dvorak-programmer";
+  };
+
+  services.kmscon = {
+    enable = true;
+    hwRender = true;
+    extraConfig = ''
+      font-name=MesloLGS NF
+      font-size=14
+    '';
   };
 
   # Enable CUPS to print documents.
@@ -160,6 +175,7 @@
       roboto
       fira-code
       hack-font
+      meslo-lgs-nf
       (nerdfonts.override { fonts = [ "FiraCode" "Hack" "JetBrainsMono"]; })
     ];
     fontconfig = {
