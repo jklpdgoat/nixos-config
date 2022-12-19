@@ -51,11 +51,12 @@
   # Console config
   console = {
     #earlySetup = true;
-    packages = [
-      pkgs.terminus_font
-      pkgs.powerline-fonts
-    ];
-    font = "ter-powerline-v18b";
+    #packages = [
+    #  pkgs.terminus_font
+    #  pkgs.powerline-fonts
+    #];
+    #font = "ter-powerline-v18b";
+    font = "${pkgs.powerline-fonts}/share/consolefonts/ter-powerline-v18b.psf.gz";
     keyMap = "dvorak-programmer";
   };
 

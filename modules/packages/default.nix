@@ -14,6 +14,7 @@ in {
       wezterm alacritty helix vim
       ripgrep exa htop fzf pass gnupg bat jq wget
       wl-clipboard
+      nix-index   # for nix-locate command
       
       #firefox-wayland
       
