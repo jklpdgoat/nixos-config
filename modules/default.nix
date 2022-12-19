@@ -5,7 +5,7 @@
     imports = [
         # gui
         #./sway
-        #./foot
+        ./foot
         #./wofi
 
         ## cli
