@@ -67,6 +67,8 @@ in {
 
         export PATH=~/.npm-packages/bin:$PATH
         export NODE_PATH=~/.npm-packages/lib/node_modules
+
+        alias ssh='TERM=xterm-256color ssh'
       '';
     };
   
