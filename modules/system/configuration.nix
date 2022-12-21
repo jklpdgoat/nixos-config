@@ -184,6 +184,8 @@
     };
   };
 
+  virtualisation.docker.enable = true;
+
   # user systemd services
   #systemd.user.services.foot-server@wayland-0.service = {
   #  description = "Execute foot server as a service";
