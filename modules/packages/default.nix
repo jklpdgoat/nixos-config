@@ -68,6 +68,7 @@ in {
         export PATH=~/.npm-packages/bin:$PATH
         export NODE_PATH=~/.npm-packages/lib/node_modules
 
+        # Fix terminal mess when SSH-ing into a remote machine
         alias ssh='TERM=xterm-256color ssh'
       '';
     };
@@ -75,6 +76,14 @@ in {
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+
+    programs.vscode = {
+      enable = true;
+      extensions = with pkgs.vscode-extensions; [
+        vscodevim.vim
+        yzhang.markdown-all-in-one
+      ];
     };
 
   };
