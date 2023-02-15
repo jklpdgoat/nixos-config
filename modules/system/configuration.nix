@@ -186,6 +186,10 @@
 
   virtualisation.docker.enable = true;
 
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "jklp" ];
+
   # user systemd services
   #systemd.user.services.foot-server@wayland-0.service = {
   #  description = "Execute foot server as a service";
