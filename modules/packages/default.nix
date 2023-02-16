@@ -28,9 +28,10 @@ in {
       rnix-lsp terraform-ls
       nodePackages_latest.yaml-language-server
       nodePackages_latest.bash-language-server
+      nodePackages_latest.vscode-json-languageserver
       
       # cloud tools
-      awscli2 terraform
+      awscli2 terraform ansible
     ];
 
     home.file.".config/alacritty/alacritty.yml".source = ./alacritty;
