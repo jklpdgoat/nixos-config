@@ -32,6 +32,9 @@ in {
       
       # cloud tools
       awscli2 terraform ansible
+
+      # python env
+      poetry
     ];
 
     home.file.".config/alacritty/alacritty.yml".source = ./alacritty;
