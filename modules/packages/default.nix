@@ -31,8 +31,9 @@ in {
       nodePackages_latest.vscode-json-languageserver
       
       # cloud tools
-      awscli2 terraform packer
+      terraform packer vault
       ansible
+      awscli2 
 
       # python env
       poetry 
