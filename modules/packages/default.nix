@@ -31,10 +31,11 @@ in {
       nodePackages_latest.vscode-json-languageserver
       
       # cloud tools
-      awscli2 terraform ansible
+      awscli2 terraform packer
+      ansible
 
       # python env
-      poetry
+      poetry 
     ];
 
     home.file.".config/alacritty/alacritty.yml".source = ./alacritty;
