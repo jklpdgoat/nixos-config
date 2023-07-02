@@ -45,7 +45,7 @@
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
-    xkbVariant = "dvp";
+    xkbVariant = "dvorak";
   };
   
   # Console config
@@ -150,12 +150,12 @@
     settings.auto-optimise-store = true;
     settings.allowed-users = [ "jklp" ];
     settings.trusted-users = [ "root" "jklp" ];
-    #settings.trusted-public-keys = [
-    #  "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-    #];
-    #settings.substituters = [
-    #  "https://cache.iog.io"
-    #];
+    settings.trusted-public-keys = [
+      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+    ];
+    settings.substituters = [
+      "https://cache.iog.io"
+    ];
     gc = {
         automatic = true;
         dates = "weekly";
