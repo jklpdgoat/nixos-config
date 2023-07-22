@@ -25,7 +25,7 @@ in {
       #pulseaudio
       
       # LSP binaries
-      rnix-lsp terraform-ls
+      nil rnix-lsp terraform-ls
       nodePackages_latest.yaml-language-server
       nodePackages_latest.bash-language-server
       nodePackages_latest.vscode-json-languageserver
