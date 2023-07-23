@@ -110,7 +110,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ ];
+  # environment.systemPackages = with pkgs; [ ];
   environment.shells = with pkgs; [ zsh ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -120,6 +120,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  programs.zsh.enable = true;
 
   # List services that you want to enable:
 
@@ -186,9 +187,9 @@
 
   virtualisation.docker.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  users.extraGroups.vboxusers.members = [ "jklp" ];
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  # users.extraGroups.vboxusers.members = [ "jklp" ];
 
   # user systemd services
   #systemd.user.services.foot-server@wayland-0.service = {
