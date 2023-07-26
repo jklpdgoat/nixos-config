@@ -9,10 +9,21 @@ in {
   config = mkIf cfg.enable {
   	home.packages = with pkgs; [
       brave
+      telegram-desktop
+      zoom
+      obsidian
+      obs-studio
+      wezterm
 
       # CLI
-      wezterm alacritty helix vim
+      wezterm alacritty helix vim tmux
       ripgrep exa htop fzf pass gnupg bat jq wget
+      zip tree
+      memtester
+      traceroute mtr
+      usbutils
+      asciiquarium
+      neofetch
       #wl-clipboard
       nix-index   # for nix-locate command
       
@@ -26,6 +37,7 @@ in {
       
       # LSP binaries
       nil rnix-lsp terraform-ls
+      lua-language-server
       nodePackages_latest.yaml-language-server
       nodePackages_latest.bash-language-server
       nodePackages_latest.vscode-json-languageserver
@@ -76,6 +88,11 @@ in {
 
         # Fix terminal mess when SSH-ing into a remote machine
         alias ssh='TERM=xterm-256color ssh'
+
+        # Exa, a modern replacement for ls
+        alias lh='exa -lh --accessed --inode --blocks --icons'
+        alias lg='exa -lh --git --icons'
+        alias ls='exa'
       '';
     };
   

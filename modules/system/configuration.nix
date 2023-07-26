@@ -178,7 +178,7 @@
       fira-code
       hack-font
       meslo-lgs-nf
-      (nerdfonts.override { fonts = [ "FiraCode" "Hack" "JetBrainsMono"]; })
+      (nerdfonts.override { fonts = [ "FiraCode" "Hack" "JetBrainsMono" "DroidSansMono"]; })
     ];
     fontconfig = {
       hinting.autohint = true;
