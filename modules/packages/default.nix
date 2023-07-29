@@ -109,5 +109,35 @@ in {
       ];
     };
 
+    # Added to System Level
+    # programs.dconf.enable = true;
+
+    gtk = {
+      enable = true;
+      font.name = "Noto Sans";
+      font.package = pkgs.noto-fonts;
+      iconTheme.name = "Papirus-Dark-Maia";
+      iconTheme.package = pkgs.papirus-maia-icon-theme;
+      # theme.name = "Dracula";
+      # theme.package = pkgs.dracula-theme;
+      # theme.name = "Vimix-light";
+      # theme.package = pkgs.vimix-gtk-themes;
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+        gtk-icon-theme-name   = "Papirus-Dark-Maia";
+        # gtk-cursor-theme-name = "capitaine-cursors";
+      };
+    };
+
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        # cursor-theme = "Capitaine Cursors";
+      };
+    };
+    xdg.systemDirs.data = [
+      "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+      "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}"
+    ];
+
   };
 }
