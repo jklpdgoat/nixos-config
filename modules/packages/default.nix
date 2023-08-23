@@ -10,9 +10,11 @@ in {
   	home.packages = with pkgs; [
       brave
       telegram-desktop
+      element-desktop
       zoom
       obsidian
       obs-studio
+      obs-studio-plugins.droidcam-obs
       wezterm
 
       # CLI
@@ -26,6 +28,9 @@ in {
       neofetch
       #wl-clipboard
       nix-index   # for nix-locate command
+
+      # fonts
+      hack-font
       
       #firefox-wayland
       
@@ -49,6 +54,13 @@ in {
 
       # python env
       poetry 
+
+      # vulkan-sdk
+      # glslang
+      # vulkan-tools
+      # vulkan-loader
+      # vulkan-headers
+      # vulkan-validation-layers
     ];
 
     home.file.".config/alacritty/alacritty.yml".source = ./alacritty;
@@ -67,6 +79,17 @@ in {
           error_symbol = "[💥](bold red)";
         };
 
+        rust = {
+          format = "[$symbol($version )]($style)";
+          version_format = "v$raw";
+          symbol = "🦀 ";
+          style = "bold red bg:0x86BBD8";
+          disabled = false;
+          detect_extensions = ["rs"];
+          detect_files = ["Cargo.toml"];
+          detect_folders = [];
+        };
+
         # package.disabled = true;
       };
     };
@@ -82,6 +105,10 @@ in {
       initExtra = ''
         eval "$(starship init zsh)"
         eval "$(direnv hook zsh)"
+
+        export EDITOR=hx
+
+        export PATH=~/.cargo/bin:$PATH
 
         export PATH=~/.npm-packages/bin:$PATH
         export NODE_PATH=~/.npm-packages/lib/node_modules

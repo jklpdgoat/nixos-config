@@ -35,12 +35,75 @@
   i18n.defaultLocale = "en_HK.UTF-8";
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.desktopManager.xfce.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.xfce.enable = true;
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+  # services.xserver.displayManager.defaultSession = "plasmawayland";
+
+  services.xserver = {
+    enable = true;
+    displayManager = {
+      gdm.enable = true;
+    };
+    desktopManager = {
+      # xterm.enable = true;
+      gnome.enable = true;
+    };
+    # displayManager.defaultSession = "xfce";
+  };
+
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+  ]) ++ (with pkgs.gnome; [
+    cheese # webcam tool
+    gnome-music
+    gnome-terminal
+    gedit # text editor
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    gnome-characters
+    totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+  ]);
+
+  environment.systemPackages = [
+    pkgs.gnomeExtensions.appindicator
+  ];
+
+  services.udev.packages = with pkgs; [
+    gnome.gnome-settings-daemon
+  ];
+
+  # environment.systemPackages = with pkgs.libsForQt5; [
+  #   bluedevil
+  # ];
+
+  # environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+  #   elisa
+  #   gwenview
+  #   okular
+  #   oxygen
+  #   khelpcenter
+  #   konsole
+  #   plasma-browser-integration
+  #   print-manager
+  # ];
+
+  # environment.systemPackages = [ pkgs.arc-theme ];
+  # services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+  #         [org.gnome.desktop.interface]
+  #         gtk-theme='Arc-Dark'
+  # '';
 
   # Configure keymap in X11
   services.xserver = {
@@ -74,7 +137,9 @@
 
   # Enable sound with pipewire.
   sound.enable = true;
+  sound.mediaKeys.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.bluetooth.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -169,7 +234,8 @@
       experimental-features = nix-command flakes
       keep-derivations = true
       keep-outputs = true
-      #allow-import-from-derivation = true
+      max-jobs = auto
+      allow-import-from-derivation = true
     '';
   };
 
