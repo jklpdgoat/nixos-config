@@ -14,7 +14,7 @@ in {
       zoom
       obsidian
       obs-studio
-      obs-studio-plugins.droidcam-obs
+      # obs-studio-plugins.droidcam-obs
       wezterm
 
       # CLI
