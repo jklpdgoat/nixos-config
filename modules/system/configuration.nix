@@ -237,7 +237,7 @@
       keep-derivations = true
       keep-outputs = true
       max-jobs = auto
-      allow-import-from-derivation = true
+      #allow-import-from-derivation = true
     '';
   };
 

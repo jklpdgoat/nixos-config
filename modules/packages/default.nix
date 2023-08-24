@@ -10,7 +10,7 @@ in {
   	home.packages = with pkgs; [
       telegram-desktop
       element-desktop
-      zoom
+      zoom-us
       obsidian
       obs-studio
       # obs-studio-plugins.droidcam-obs
