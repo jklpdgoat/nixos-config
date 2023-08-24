@@ -8,7 +8,6 @@ in {
   options.modules.packages = { enable = mkEnableOption "packages"; };
   config = mkIf cfg.enable {
   	home.packages = with pkgs; [
-      brave
       telegram-desktop
       element-desktop
       zoom
@@ -28,6 +27,8 @@ in {
       neofetch
       #wl-clipboard
       nix-index   # for nix-locate command
+
+      wl-clipboard
 
       # fonts
       hack-font
