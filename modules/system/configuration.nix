@@ -44,6 +44,9 @@
   # services.xserver.desktopManager.plasma5.enable = true;
   # services.xserver.displayManager.defaultSession = "plasmawayland";
 
+  services.thermald.enable = true;
+  # services.tlp.enable = true;
+
   services.xserver = {
     enable = true;
     displayManager = {
@@ -243,7 +246,7 @@
 
   # Fonts
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       jetbrains-mono
       roboto
       fira-code

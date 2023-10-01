@@ -121,6 +121,19 @@ in {
         alias lh='exa -lh --accessed --inode --blocks --icons'
         alias lg='exa -lh --git --icons'
         alias ls='exa'
+
+        # Credit:
+        # https://superuser.com/questions/378018/how-can-i-do-ctrl-z-and-bg-in-one-keypress-to-make-process-continue-in-background
+        fancy-ctrl-z () {
+          if [[ $#BUFFER -eq 0 ]]; then
+            bg
+            zle redisplay
+          else
+            zle push-input
+          fi
+        }
+        zle -N fancy-ctrl-z
+        bindkey '^Z' fancy-ctrl-z
       '';
     };
   
