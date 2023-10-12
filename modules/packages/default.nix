@@ -18,7 +18,7 @@ in {
 
       # CLI
       wezterm alacritty helix vim tmux
-      ripgrep exa htop fzf pass gnupg bat jq wget
+      ripgrep eza htop fzf pass gnupg bat jq wget
       zip tree
       memtester
       traceroute mtr
@@ -117,10 +117,10 @@ in {
         # Fix terminal mess when SSH-ing into a remote machine
         alias ssh='TERM=xterm-256color ssh'
 
-        # Exa, a modern replacement for ls
-        alias lh='exa -lh --accessed --inode --blocks --icons'
-        alias lg='exa -lh --git --icons'
-        alias ls='exa'
+        # Exa, a modern replacement for ls - replaced by eza, a maintained fork
+        alias lh='eza -lh --accessed --inode --blocks --icons'
+        alias lg='eza -lh --git --icons'
+        alias ls='eza'
 
         # Credit:
         # https://superuser.com/questions/378018/how-can-i-do-ctrl-z-and-bg-in-one-keypress-to-make-process-continue-in-background
