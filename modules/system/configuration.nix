@@ -9,7 +9,11 @@
   boot.consoleLogLevel = 0;
   boot.initrd.verbose = false;
   boot.plymouth.enable = true;
-  boot.kernelParams = [ "quiet" "splash" "rd.systemd.show_status=false" "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail" ];
+  boot.kernelParams = [
+    "quiet" "splash" "rd.systemd.show_status=false"
+    "rd.udev.log_level=3" "udev.log_priority=3" "boot.shell_on_fail"
+    "i915.force_probe=46a8"
+  ];
   
   boot.loader.systemd-boot.enable = true;
   #boot.loader.timeout = 0;
@@ -80,7 +84,13 @@
 
   environment.systemPackages = [
     pkgs.gnomeExtensions.appindicator
+    pkgs.man-pages
+    pkgs.man-pages-posix
   ];
+
+  documentation.enable = true;
+  documentation.man.enable = true;
+  documentation.dev.enable = true;
 
   services.udev.packages = with pkgs; [
     gnome.gnome-settings-daemon
