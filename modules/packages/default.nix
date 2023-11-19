@@ -16,6 +16,9 @@ in {
       # obs-studio-plugins.droidcam-obs
       wezterm
 
+      # pls no rm files, naur naur naur, never again
+      trashy
+
       # CLI
       wezterm alacritty helix vim tmux
       ripgrep eza htop fzf pass gnupg bat jq wget
