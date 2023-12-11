@@ -65,6 +65,9 @@ in {
       # vulkan-loader
       # vulkan-headers
       # vulkan-validation-layers
+
+      # screenkey
+      screenkey
     ];
 
     home.file.".config/alacritty/alacritty.yml".source = ./alacritty;
