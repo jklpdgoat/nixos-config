@@ -11,7 +11,7 @@ in {
       telegram-desktop
       element-desktop
       zoom-us
-      obsidian
+      # obsidian
       obs-studio
       # obs-studio-plugins.droidcam-obs
       wezterm
@@ -67,11 +67,14 @@ in {
       # vulkan-validation-layers
 
       # screenkey
-      screenkey
+      # wshowkeys
     ];
 
     home.file.".config/alacritty/alacritty.yml".source = ./alacritty;
-    
+
+    # doen't work :(
+    # programs.wshowkeys.enable = true;
+
     # Lazy folder separation ;(
     programs.starship = {
       enable = true;

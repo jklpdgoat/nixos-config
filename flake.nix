@@ -5,6 +5,7 @@
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
         # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+        # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 
         home-manager = {
             url = "github:nix-community/home-manager";
@@ -54,7 +55,7 @@
         in {
             nixosConfigurations = {
                 nixhp15s = mkSystem inputs.nixpkgs "x86_64-linux" "nixhp15s";
-                usb3ssdnixos = mkSystem inputs.nixpkgs "x86_64-linux" "usb3ssdnixos";
+                # usb3ssdnixos = mkSystem inputs.nixpkgs "x86_64-linux" "usb3ssdnixos";
             };
     };
 }
