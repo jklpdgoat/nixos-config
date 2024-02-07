@@ -120,8 +120,12 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "dvorak";
+    # layout = "us";
+    # xkbVariant = "dvorak";
+    xkb = {
+     layout = "us";
+     variant = "dvorak";
+    };
   };
   
   # Console config
