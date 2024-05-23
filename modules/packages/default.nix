@@ -148,6 +148,8 @@ in {
         # zle -N fancy-ctrl-z
         # bindkey '^Z' fancy-ctrl-z
 
+        # I don't want to waste time going arrow keys -_-
+        bindkey '^I' autosuggest-accept
         
         # Simple Ctrl-Z switch from bg to fg
         bindkey -s '^z' 'fg\n'
