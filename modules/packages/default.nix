@@ -149,7 +149,7 @@ in {
         # bindkey '^Z' fancy-ctrl-z
 
         # I don't want to waste time going arrow keys -_-
-        bindkey '^I' autosuggest-accept
+        bindkey '^I^I' autosuggest-accept
         
         # Simple Ctrl-Z switch from bg to fg
         bindkey -s '^z' 'fg\n'
