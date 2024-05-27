@@ -21,7 +21,7 @@ in {
 
       # CLI
       wezterm alacritty helix vim tmux
-      ripgrep eza htop fzf pass gnupg bat jq wget
+      ripgrep eza htop fzf fd pass gnupg bat jq wget
       zip tree
       memtester
       traceroute mtr
@@ -153,6 +153,9 @@ in {
         
         # Simple Ctrl-Z switch from bg to fg
         bindkey -s '^z' 'fg\n'
+
+        # cd into fd | fzf
+        alias f='cd $(fd --type d --hidden --exclude .git --exclude node_module --exclude .cache --exclude .npm --exclude .mozilla --exclude .meteor --exclude .nv | fzf)'
       '';
     };
   
