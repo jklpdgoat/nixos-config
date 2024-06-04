@@ -41,51 +41,88 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-  # Enable the XFCE Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.xfce.enable = true;
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
-  # services.xserver.displayManager.defaultSession = "plasmawayland";
-
   services.thermald.enable = true;
   # services.tlp.enable = true;
 
-  services.xserver = {
+  # services.xserver = {
+  #   enable = true;
+
+  #   displayManager = {
+  #     gdm.enable = true;
+  #   };
+
+  #   desktopManager = {
+  #     # xterm.enable = true;
+  #     # gnome.enable = true;
+  #     xfce = {
+  #       enable = true;
+  #       # noDesktop = true;
+  #       # enableXfwm = false;
+  #     };
+  #   };
+  # };
+
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+
+  # programs.hyprland.enable = true;
+  programs.hyprland = {
     enable = true;
-    displayManager = {
-      gdm.enable = true;
-    };
-    desktopManager = {
-      # xterm.enable = true;
-      gnome.enable = true;
-    };
-    # displayManager.defaultSession = "xfce";
+    # nvidiaPatches = true;
+    xwayland.enable = true;
+  }; 
+
+  environment.sessionVariables = {
+    # If cursor becomes invisible
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # For Electron apps (terrible btw)
+    NIXOS_OZONE_WL = "1";
   };
 
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
-    gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    cheese # webcam tool
-    gnome-music
-    gnome-terminal
-    # gedit # text editor
-    epiphany # web browser
-    geary # email reader
-    evince # document viewer
-    gnome-characters
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-  ]);
+  hardware = {
+    # opengl already enabled
+    # Most wayland compositors need this
+    # nvidia.modsetting.enable = true;
+  };
+  
+
+  # environment.gnome.excludePackages = (with pkgs; [
+  #   gnome-photos
+  #   gnome-tour
+  # ]) ++ (with pkgs.gnome; [
+  #   cheese # webcam tool
+  #   gnome-music
+  #   gnome-terminal
+  #   # gedit # text editor
+  #   epiphany # web browser
+  #   geary # email reader
+  #   evince # document viewer
+  #   gnome-characters
+  #   totem # video player
+  #   tali # poker game
+  #   iagno # go game
+  #   hitori # sudoku game
+  #   atomix # puzzle game
+  # ]);
 
   environment.systemPackages = [
+    # For general unix stuff
     pkgs.gnomeExtensions.appindicator
     pkgs.man-pages
     pkgs.man-pages-posix
+
+    # For hyprland stuff
+    (pkgs.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+    )
+    pkgs.kitty
+    pkgs.dunst
+    pkgs.rofi-wayland
+    pkgs.swww
+
+    pkgs.networkmanagerapplet
   ];
 
   documentation.enable = true;
@@ -120,24 +157,17 @@
 
   # Configure keymap in X11
   services.xserver = {
-    # layout = "us";
-    # xkbVariant = "dvorak";
     xkb = {
-     layout = "us";
-     variant = "dvorak";
+      layout = "us";
+      variant = "dvorak";
     };
   };
-  
+
   # Console config
   console = {
-    #earlySetup = true;
-    #packages = [
-    #  pkgs.terminus_font
-    #  pkgs.powerline-fonts
-    #];
-    #font = "ter-powerline-v18b";
     font = "${pkgs.powerline-fonts}/share/consolefonts/ter-powerline-v18b.psf.gz";
-    keyMap = "dvorak";
+    # keyMap = "us";
+    useXkbConfig = true;
   };
 
   services.kmscon = {
@@ -145,7 +175,7 @@
     hwRender = true;
     extraConfig = ''
       font-name=MesloLGS NF
-      font-size=14
+      font-size=13
     '';
   };
 
@@ -164,7 +194,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -293,16 +323,16 @@
   #}
   
   # XDG Format
-  # xdg = {
-  #   portal = {
-  #     enable = true;
-  #     extraPortals = with pkgs; [
-  #       xdg-desktop-portal-wlr
-  #       xdg-desktop-portal-gtk
-  #     ];
-  #     #gtkUsePortal = true;
-  #   };
-  # };
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        # xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+      #gtkUsePortal = true;
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

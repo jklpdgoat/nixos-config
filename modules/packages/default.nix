@@ -117,6 +117,10 @@ in {
       #envExtra = ''
       #'';
       initExtra = ''
+        if [ "$(tty)" = "/dev/tty1" ];then
+          exec Hyprland
+        fi
+
         eval "$(starship init zsh)"
         eval "$(direnv hook zsh)"
 
