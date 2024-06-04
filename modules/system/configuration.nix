@@ -172,7 +172,9 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  # trace: warning: The option `services.xserver.libinput.enable' defined in `/nix/store/3ladnq91hj9b8q70w4943va7rdiqw2dr-source/modules/system/configuration.nix' has been renamed to `services.libinput.enable'.
+  # services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
   #services.xserver.libinput.touchpad.middleEmulation = true;
   #services.xserver.libinput.touchpad.tapping = true;
 
@@ -234,7 +236,8 @@
   };
   
   nix = {
-    package = pkgs.nixUnstable;
+    # package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     settings.auto-optimise-store = true;
     settings.allowed-users = [ "jklp" ];
     settings.trusted-users = [ "root" "jklp" ];
