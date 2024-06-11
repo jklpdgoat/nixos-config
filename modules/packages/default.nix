@@ -31,6 +31,9 @@ in {
       #wl-clipboard
       nix-index   # for nix-locate command
 
+      # file-manager tui
+      ranger
+
       wl-clipboard
 
       # fonts
@@ -117,9 +120,9 @@ in {
       #envExtra = ''
       #'';
       initExtra = ''
-        if [ "$(tty)" = "/dev/tty1" ];then
-          exec Hyprland
-        fi
+        # if [ "$(tty)" = "/dev/tty1" ];then
+        #   exec Hyprland
+        # fi
 
         eval "$(starship init zsh)"
         eval "$(direnv hook zsh)"
@@ -151,6 +154,9 @@ in {
         # }
         # zle -N fancy-ctrl-z
         # bindkey '^Z' fancy-ctrl-z
+
+        # Change ZSH autosuggest hi style
+        # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=',bold,standout'
 
         # I don't want to waste time going arrow keys -_-
         bindkey '^I^I' autosuggest-accept

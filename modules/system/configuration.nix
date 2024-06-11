@@ -122,8 +122,28 @@
     pkgs.rofi-wayland
     pkgs.swww
 
+    pkgs.swayidle
+    pkgs.swaylock
+
+    # pkgs.brillo
+    pkgs.brightnessctl
+
     pkgs.networkmanagerapplet
+
+    pkgs.auto-cpufreq
   ];
+
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+      governor = "powersave";
+      turbo = "never";
+    };
+    charger = {
+      governor = "powersave";
+      turbo = "never";
+    };
+  };
 
   documentation.enable = true;
   documentation.man.enable = true;
@@ -154,6 +174,7 @@
   #         [org.gnome.desktop.interface]
   #         gtk-theme='Arc-Dark'
   # '';
+
 
   # Configure keymap in X11
   services.xserver = {
