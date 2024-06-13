@@ -107,6 +107,8 @@
   # ]);
 
   environment.systemPackages = [
+    # For waybar icons
+    pkgs.font-awesome
     # For general unix stuff
     pkgs.gnomeExtensions.appindicator
     pkgs.man-pages
@@ -140,7 +142,8 @@
       turbo = "never";
     };
     charger = {
-      governor = "powersave";
+      governor = "performance";
+      # energy_performance_preference = "performance";
       turbo = "never";
     };
   };
@@ -278,6 +281,8 @@
   };
   hardware.opengl = {
     enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
@@ -323,6 +328,7 @@
       (nerdfonts.override { fonts = [ "FiraCode" "Hack" "JetBrainsMono" "DroidSansMono"]; })
     ];
     fontconfig = {
+      enable = true;
       hinting.autohint = true;
     };
   };

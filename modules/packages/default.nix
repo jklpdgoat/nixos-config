@@ -27,7 +27,7 @@ in {
       traceroute mtr
       usbutils
       asciiquarium
-      neofetch
+      fastfetch
       #wl-clipboard
       nix-index   # for nix-locate command
 
