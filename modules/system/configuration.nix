@@ -290,6 +290,19 @@
       libvdpau-va-gl
     ];
   };
+
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+
+    nvidiaSettings = true;
+
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
   
   nix = {
     # package = pkgs.nixUnstable;
@@ -334,6 +347,25 @@
   };
 
   virtualisation.docker.enable = true;
+
+  # Logind?
+  # services.logind.extraConfig = ''
+  #   # KillUserProcesses=no
+  #   HandlePowerKey=hibernate
+  #   HandlePowerKeyLongPress=poweroff
+  #   # HandleRebootKey=reboot
+  #   # HandleRebootKeyLongPress=poweroff
+  #   HandleSuspendKey=suspend
+  #   # HandleSuspendKeyLongPress=hibernate
+  #   # HandleHibernateKey=hibernate
+  #   # HandleHibernateKeyLongPress=ignore
+  #   HandleLidSwitch=suspend
+  #   # HandleLidSwitchExternalPower=suspend
+  #   # HandleLidSwitchDocked=ignore
+  # '';
+  services.logind = {
+    powerKey = "hibernate";
+  };
 
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;

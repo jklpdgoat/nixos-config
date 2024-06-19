@@ -8,6 +8,7 @@ in {
   options.modules.packages = { enable = mkEnableOption "packages"; };
   config = mkIf cfg.enable {
   	home.packages = with pkgs; [
+      # Communicate with humans
       telegram-desktop
       element-desktop
       zoom-us
@@ -30,9 +31,17 @@ in {
       fastfetch
       #wl-clipboard
       nix-index   # for nix-locate command
+      nix-search-cli # better nix search command
 
       # file-manager tui
       ranger
+
+      # file-manager gui
+      pcmanfm
+
+      # image preview for ranger
+      # does not work with ranger
+      # ueberzug
 
       wl-clipboard
 
@@ -48,16 +57,16 @@ in {
       #pulseaudio
       
       # LSP binaries
-      nil terraform-ls
+      nil
       lua-language-server
       nodePackages_latest.yaml-language-server
       nodePackages_latest.bash-language-server
       nodePackages_latest.vscode-json-languageserver
+
+      cairo-lang
       
       # cloud tools
-      terraform packer vault
-      ansible
-      awscli2 
+      terraform terraform-ls packer vault ansible awscli2 
 
       # python env
       poetry 
@@ -71,6 +80,11 @@ in {
 
       # screenkey
       # wshowkeys
+
+      # wayland screenshot trifecta
+      grim
+      slurp
+      swappy
     ];
 
     home.file.".config/alacritty/alacritty.yml".source = ./alacritty;
@@ -130,7 +144,6 @@ in {
         export EDITOR=hx
 
         export PATH=~/.cargo/bin:$PATH
-
         export PATH=~/.npm-packages/bin:$PATH
         export NODE_PATH=~/.npm-packages/lib/node_modules
 
@@ -181,6 +194,8 @@ in {
         yzhang.markdown-all-in-one
       ];
     };
+
+    # programs.thunar.enable = true;
 
     # Added to System Level
     # programs.dconf.enable = true;
