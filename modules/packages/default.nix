@@ -144,6 +144,7 @@ in {
         export EDITOR=hx
 
         export PATH=~/.cargo/bin:$PATH
+        export PATH=~/.npm-global/bin:$PATH
         export PATH=~/.npm-packages/bin:$PATH
         export NODE_PATH=~/.npm-packages/lib/node_modules
 
